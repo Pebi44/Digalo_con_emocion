@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Digalo con emocion</string>
+    <string name="facebook_app_id">165070000546520</string>
+<string name="instrucciones_1">Es un juego de trivia. Se muestra un grupo de emoticones que representa una película, la cual debes adivinar.
+    Cada emoticón representa una palabra. El emoticón
+    </string>
+    <string name="instrucciones_2">es un comodín, representa una conjunción, una preposición o una palabra que no pueda ser representada. Ej: “La, Con, Que, Para, Y, O, etc”
+    Si acertás sin pedir pistas, obtenés 100 puntos. Por cada pista que utilices se descuentan 25 puntos. Hay una máximo de 3 pistas. En caso de errarle, el puntaje obtenido es 0.
+    Suerte!</string>
+
+
+</resources>
