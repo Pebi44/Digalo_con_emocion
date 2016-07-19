@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -171,7 +173,26 @@ public String normalizar(String pababra){
 
       alerta.show();
     }
+    ////////////////// MENU ////////////////////
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.Minstrucciones) {
+            Instrucciones ins = new Instrucciones(Jugada.this);
+            ins.show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    ////////////////////// fin menu ///////////////////////////////
 
 }
 

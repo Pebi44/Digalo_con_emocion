@@ -22,14 +22,15 @@ public class asyncGetData extends AsyncTask<Void, Void, JSONArray> {
     Context context;
     MenuPrincipal menuPrincipal;
     private ProgressDialog pDialog;
-    Httppostaux post, post2;
+    Httppostaux post;
     String IP_Server = "digaloconemocion.esy.es";//IP DE NUESTRO PC
     String URL_connect1 = "http://" + IP_Server + "/getPosition.php";//ruta en donde estan nuestros archivos
     String URL_connect2 = "http://" + IP_Server + "/getTablaPosition.php";//ruta en donde estan nuestros archivos
     String email, accion="";
-
+    Boolean cargando=false;
 
     protected void onPreExecute() {
+        cargando=true;
         pDialog = new ProgressDialog(context);
         pDialog.setMessage("Cargando datos...");
         pDialog.setIndeterminate(false);
@@ -81,6 +82,10 @@ public class asyncGetData extends AsyncTask<Void, Void, JSONArray> {
         return jdata;
     }
     protected void onPostExecute(JSONArray jdata2) {
+        cargando = false;
+        pDialog.dismiss();
+
+        Log.e("onPostExecute getdata: ","entre" );
         if (accion.equals("posicion")) {
 
             JSONObject json_data2 = null; //creamos un objeto JSON
@@ -96,9 +101,14 @@ public class asyncGetData extends AsyncTask<Void, Void, JSONArray> {
             }
 
         }
-        pDialog.dismiss();
-    }
+        Log.e("onPostExecute getdata: ","estoy saliendo" );
+        Log.e("onPostExecute getdata: ","sali" );
 
+
+    }
+public Boolean getBandera(){
+    return cargando;
+}
     public asyncGetData(Context context, MenuPrincipal menuPrincipal, String email, String accion) {
         this.context = context;
         this.menuPrincipal = menuPrincipal;

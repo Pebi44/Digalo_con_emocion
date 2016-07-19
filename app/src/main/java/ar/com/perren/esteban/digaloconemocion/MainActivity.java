@@ -3,6 +3,7 @@ package ar.com.perren.esteban.digaloconemocion;
         import android.app.ProgressDialog;
         import android.content.Context;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.os.AsyncTask;
         import android.os.Bundle;
         import android.os.Vibrator;
@@ -66,7 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_main);
-        DBHelper db = new DBHelper(MainActivity.this);
+          SharedPreferences settings = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
+                  if(settings.getString("skipInstrucciones","False").equals("False")){
+              Instrucciones ins = new Instrucciones(MainActivity.this);
+              ins.show();
+          }
+          DBHelper db = new DBHelper(MainActivity.this);
           try {
               db.createDataBase();
           } catch (IOException e) {
@@ -289,8 +295,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.Minstrucciones) {
             Instrucciones ins = new Instrucciones(MainActivity.this);
             ins.show();
-            //Intent i = new Intent(getApplicationContext(), Instrucciones.class);
-           // startActivity(i);
+
             return true;
         }
 

@@ -68,6 +68,7 @@
             android:id="@+id/TVPistas"
             android:gravity="center"
             android:textSize="18sp"
+            android:textColor="#FFFFFF"
             android:layout_alignBottom="@+id/bnuevapista"
             android:layout_alignParentLeft="true" />
 

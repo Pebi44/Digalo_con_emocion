@@ -167,7 +167,7 @@ class DBHelper extends SQLiteOpenHelper {
         valores.put("Apodo", apodo);
         valores.put("Puntaje_Total", puntajeTotal);
         valores.put("Cant_Part_Jugadas", cantidaJugadas);
-        db.insertWithOnConflict("posiciones", null, valores, SQLiteDatabase.CONFLICT_IGNORE);
+        db.insertWithOnConflict("posiciones", null, valores, SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }
     public JSONArray getTabla(){

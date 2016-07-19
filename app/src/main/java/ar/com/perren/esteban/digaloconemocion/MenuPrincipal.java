@@ -4,9 +4,13 @@ package ar.com.perren.esteban.digaloconemocion;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -63,8 +69,16 @@ public class MenuPrincipal extends AppCompatActivity {
         if(Funciones.isOnline(context)) {
             JSONArray tabla = new JSONArray();
             asyncGetData asyncgetdata = new asyncGetData(context, MenuPrincipal.this, email, "tabla");
-            asyncgetdata.execute();
-           tabla= db.getTabla();
+            try {
+                asyncgetdata.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+
+            tabla= db.getTabla();
             for(int i = 0; i<tabla.length(); i++){
                 JSONObject json = new JSONObject();
                 try {
@@ -115,4 +129,24 @@ public class MenuPrincipal extends AppCompatActivity {
         this.cantidad.setText(Cantidad);
 
     }
+    ////////////////// MENU ////////////////////
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.Minstrucciones) {
+            Instrucciones ins = new Instrucciones(MenuPrincipal.this);
+            ins.show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    ////////////////////// fin menu ///////////////////////////////
 }
