@@ -100,6 +100,7 @@ TVPistas.setText(contenido);
 
                 String respuesta = Erespuesta.getText().toString();
                 respuesta = normalizar(respuesta);
+                String pelicula2 = pelicula;
                 pelicula = normalizar(pelicula);
                 if (respuesta.equals(pelicula)) {
                     alerta.setTitle("Correcto!");
@@ -108,6 +109,7 @@ TVPistas.setText(contenido);
                     db.insert(email, idpartida, puntaje);
                 } else {
                     alerta.setTitle("Ups! Fallo!");
+                    alerta.setMessage("La respuesta era: "+ pelicula2);
                     puntaje =""+ Integer.toString(0);
                     db.insert(email, idpartida, puntaje);
                 }
@@ -148,6 +150,7 @@ public String normalizar(String pababra){
     aux =aux.replace("í","i");
     aux =aux.replace("ó","o");
     aux =aux.replace("ú","u");
+    aux =aux.replace(" ","");
 
     return aux;
 }
